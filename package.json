@@ -1,0 +1,24 @@
+{
+  "name": "hello-dao",
+  "version": "0.1.0",
+  "description": "Solana Native DAO Tutorial",
+  "main": "client/simulate.ts",
+  "scripts": {
+    "simulate": "ts-node client/simulate.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.90.0",
+    "borsh": "^0.7.0",
+    "buffer": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
