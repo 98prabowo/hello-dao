@@ -106,4 +106,4 @@ Because it is a PDA, it has no private key. When we need to move money out of it
 
 This is called **CPI (Cross-Program Invocation)** with seeds, and it's how smart contracts control funds securely.
 
-[⬅️ Previous: Environment Setup](../01-setup.md) | [Next: Initialize DAO ➡️](03-init-dao.md)
+[⬅️ Previous: Environment Setup](01-setup.md) | [Next: Initialize DAO ➡️](03-init-dao.md)

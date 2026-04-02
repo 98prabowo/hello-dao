@@ -285,4 +285,4 @@ In Solana, a transaction is "Atomic." If `init_vault` fails (for example, the ad
 
 At this point, the DAO exists and the Vault is ready to receive funds. In the next chapter, we will allow users to start proposing how to spend that money.
 
-[⬅️ Previous: State Definitions](../01-states.md) | [Next: Create Proposal ➡️](04-create-proposal.md)
+[⬅️ Previous: State Definitions](02-states.md) | [Next: Create Proposal ➡️](04-create-proposal.md)
