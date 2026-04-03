@@ -55,7 +55,9 @@ The repository includes a TypeScript client (`client/simulate.ts`) that acts as 
 
 ## Contributing
 
-This is a **learning-first** repository. If you spot a "magic number" that needs explaining or a logic check that could be more readable, please open a PR. Help us build the best "Anchorless" guide on GitHub!
+This is a **learning-first** repository. 
+If you spot a "magic number" that needs explaining or a logic check that could be more readable, please open a PR. 
+Help us build the best "Anchorless" guide on GitHub!
 
 ## Further Readings
 

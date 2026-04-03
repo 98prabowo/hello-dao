@@ -1,6 +1,7 @@
 # Instruction: Cast Vote
 
-In this chapter, we will implement the logic for the DAO's voting mechanism. This instruction demonstrates how to read from multiple state accounts simultaneously and perform **conditional status updates** based on shared thresholds.
+In this chapter, we will implement the logic for the DAO's voting mechanism. 
+This instruction demonstrates how to read from multiple state accounts simultaneously and perform **conditional status updates** based on shared thresholds.
 
 ## 1. The Instruction Data (The Input)
 
@@ -11,8 +12,9 @@ Interestingly, our `CastVoteV1` instruction does not require any external instru
 // The "Power" of the vote is derived directly from the account balance.
 ```
 
-[!NOTE]
-In this simple DAO design, we use **1 Lamport = 1 Vote**. Because we derive voting power from the account state itself, the user doesn't need to pass a "vote amount" parameter.
+> [!NOTE]
+> In this simple DAO design, we use **1 Lamport = 1 Vote**. 
+> Because we derive voting power from the account state itself, the user doesn't need to pass a "vote amount" parameter.
 
 ## 2. Defining the Accounts Struct
 
@@ -106,8 +108,9 @@ impl<'a, 'info> TryFrom<(&'a [AccountInfo<'info>], &'a Pubkey)> for CastVoteV1<'
 }
 ```
 
-[!IMPORTANT]
-Even though we aren't creating the DAO account here, we must verify its address. If we didn't, a malicious user could pass a "fake" DAO account with a `vote_threshold` of 0, allowing any proposal to pass instantly!
+> [!IMPORTANT]
+> Even though we aren't creating the DAO account here, we must verify its address. 
+> If we didn't, a malicious user could pass a "fake" DAO account with a `vote_threshold` of 0, allowing any proposal to pass instantly!
 
 ## 5. The Execution Logic
 
@@ -187,8 +190,9 @@ impl<'a, 'info> InstructionProcessor for CastVoteV1<'a, 'info> {
 }
 ```
 
-[!CAUTION]
-**Saturating Math**
-Always use `saturating_add` or `checked_add` in financial or voting logic. If you use a standard `+` and the vote count exceeds the maximum value of a `u64`, the program will panic and the transaction will fail, effectively breaking the voting process for very popular proposals.
+> [!CAUTION]
+> **Saturating Math**
+> Always use `saturating_add` or `checked_add` in financial or voting logic. 
+> If you use a standard `+` and the vote count exceeds the maximum value of a `u64`, the program will panic and the transaction will fail, effectively breaking the voting process for very popular proposals.
 
 [⬅️ Previous: Create Proposal](04-create-proposal.md) | [Next: Execute Proposal ➡️](06-execute-proposal.md)

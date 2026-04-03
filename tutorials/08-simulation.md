@@ -14,8 +14,8 @@ Run the following command to create a new keypair for your program.
 make new-keypair
 ```
 
-[!IMPORTANT]
-**Update your Code:** Copy the address printed in the terminal and paste it into your `src/lib.rs` inside the `declare_id!("...")` macro. Then, rebuild the program: `make build`.
+> [!IMPORTANT]
+> **Update your Code:** Copy the address printed in the terminal and paste it into your `src/lib.rs` inside the `declare_id!("...")` macro. Then, rebuild the program: `make build`.
 
 ### Step B: Check Program Size
 
@@ -91,10 +91,12 @@ make demo-execute
 
 ## 5. Troubleshooting & Tips
 
-[!CAUTION]
-**PDA Mismatch:** If your simulation fails with `InvalidAccountData`, double-check your seeds in the TypeScript code. They must be identical to the `SEED` constants in your Rust `states/*.rs` (e.g., "doa_v1" vs "dao_v1").
+> [!CAUTION]
+> **PDA Mismatch:** If your simulation fails with `InvalidAccountData`, double-check your seeds in the TypeScript code.
+> They must be identical to the `SEED` constants in your Rust `states/*.rs` (e.g., "doa_v1" vs "dao_v1").
 
-[!TIP]
-**Logs are your best friend:** While running the simulation, open a separate terminal and run `solana logs -u devnet`. You will see your `msg!` outputs from the Rust code appearing in real-time as the transactions process.
+> [!TIP]
+> **Logs are your best friend:** While running the simulation, open a separate terminal and run `solana logs -u devnet`. 
+> You will see your `msg!` outputs from the Rust code appearing in real-time as the transactions process.
 
 [⬅️ Previous: Entrypoint & Router](07-entrypoint.md) | [Back to: Readme ➡️](../README.md)

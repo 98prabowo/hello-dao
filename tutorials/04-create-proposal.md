@@ -1,6 +1,7 @@
 # Instruction: Create Proposal
 
-In this chapter, we will implement the logic that allows members to create a spending proposal. This instruction introduces **Composite Seeds** and **Pre-flight Validation** against existing program state.
+In this chapter, we will implement the logic that allows members to create a spending proposal. 
+This instruction introduces **Composite Seeds** and **Pre-flight Validation** against existing program state.
 
 ## 1. The Instruction Data (The Input)
 
@@ -90,7 +91,8 @@ pub struct CreateProposalV1<'a, 'info> {
 
 ## 4. PDA Verification with Composite Seeds
 
-Unlike the DAO or Vault, which use a single static string as a seed, the **Proposal PDA** is unique to the author and the recipient. This allows one person to have multiple proposals active for different targets.
+Unlike the DAO or Vault, which use a single static string as a seed, the **Proposal PDA** is unique to the author and the recipient. 
+This allows one person to have multiple proposals active for different targets.
 
 Inside `TryFrom` for the master struct:
 
@@ -154,8 +156,9 @@ impl<'a, 'info>
 }
 ```
 
-[!IMPORTANT]
-By including the `author` and `target_recipient` in the seeds, we ensure that the address is **deterministic**. If the same author tries to create a proposal for the same recipient twice, the address will conflict, naturally preventing duplicate spam.
+> [!IMPORTANT]
+> By including the `author` and `target_recipient` in the seeds, we ensure that the address is **deterministic**. 
+> If the same author tries to create a proposal for the same recipient twice, the address will conflict, naturally preventing duplicate spam.
 
 ## 5. The Execution Logic
 
@@ -241,8 +244,9 @@ impl<'a, 'info> InstructionProcessor for CreateProposalV1<'a, 'info> {
 }
 ```
 
-[!CAUTION]
-**Read Before You Write**
-In Solana Native, always perform your logic checks (like `validate_budget`) before you call `invoke_signed` to create an account. This saves the user from paying transaction fees for a creation that would have been invalid anyway.
+> [!CAUTION]
+> **Read Before You Write**
+> In Solana Native, always perform your logic checks (like `validate_budget`) before you call `invoke_signed` to create an account. 
+> This saves the user from paying transaction fees for a creation that would have been invalid anyway.
 
 [⬅️ Previous: Initialize DAO](03-init-dao.md) | [Next: Cast Vote ➡️](05-cast-vote.md)

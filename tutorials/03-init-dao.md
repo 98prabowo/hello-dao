@@ -14,12 +14,14 @@ pub struct InitDaoV1InstructionData {
 }
 ```
 
-[!NOTE]
-We use `u64` for the `vested_amount` because Solana balances (lamports) are always 64-bit unsigned integers. This avoids rounding errors that occur with floating-point numbers.
+> [!NOTE]
+> We use `u64` for the `vested_amount` because Solana balances (lamports) are always 64-bit unsigned integers. 
+> This avoids rounding errors that occur with floating-point numbers.
 
 ## 2. Defining the Accounts Struct
 
-We define the `InitDaoV1Accounts` struct to list every account required for this operation. In Solana Native, we must manually verify that these accounts are valid.
+We define the `InitDaoV1Accounts` struct to list every account required for this operation. 
+In Solana Native, we must manually verify that these accounts are valid.
 
 ```rust
 pub struct InitDaoV1Accounts<'a, 'info> {
@@ -85,7 +87,8 @@ impl<'a, 'info> TryFrom<&'a [AccountInfo<'info>]> for InitDaoV1Accounts<'a, 'inf
 
 ## 3. The Master Instruction Struct
 
-We wrap the **Accounts** and the **Instruction Data** into one object. This struct also stores the **Bumps** for our PDAs so we don't have to re-calculate them later, saving processing power (Compute Units).
+We wrap the **Accounts** and the **Instruction Data** into one object. 
+This struct also stores the **Bumps** for our PDAs so we don't have to re-calculate them later, saving processing power (Compute Units).
 
 ```rust
 pub struct InitDaoV1<'a, 'info> {
@@ -109,8 +112,8 @@ if dao_pda != *accounts.dao.key {
 }
 ```
 
-[!IMPORTANT]
-By re-calculating the PDA inside the program using our hardcoded `SEED`, we guarantee that the user is interacting with our DAO and not a fake one they created elsewhere.
+> [!IMPORTANT]
+> By re-calculating the PDA inside the program using our hardcoded `SEED`, we guarantee that the user is interacting with our DAO and not a fake one they created elsewhere.
 
 Inside `TryFrom` for our master instruction struct we have `program_id`. We can check PDA derivation.
 
@@ -274,10 +277,11 @@ impl<'a, 'info> InstructionProcessor for InitDaoV1<'a, 'info> {
 }
 ```
 
-[!CAUTION]
-
-**The Power of Atomicity**
-In Solana, a transaction is "Atomic." If `init_vault` fails (for example, the admin doesn't have enough SOL for the `vested_amount`), the entire transaction fails. The dao account will not be created. This prevents "broken states" where you have a DAO config but no Treasury.
+> [!CAUTION]
+> **The Power of Atomicity**
+> In Solana, a transaction is "Atomic". 
+> If `init_vault` fails (for example, the admin doesn't have enough SOL for the `vested_amount`), the entire transaction fails. 
+> The dao account will not be created. This prevents "broken states" where you have a DAO config but no Treasury.
 
 ---
 

@@ -1,6 +1,8 @@
 # State Definitions
 
-In Solana, we don't have a centralized database. Instead, every "row" of data is its own **Account**. To find these accounts without a database, we use **PDAs (Program Derived Addresses)**.
+In Solana, we don't have a centralized database. 
+Instead, every "row" of data is its own **Account**. 
+To find these accounts without a database, we use **PDAs (Program Derived Addresses)**.
 
 ## 1. The PDA: Your Deterministic Index
 
@@ -12,7 +14,9 @@ Because the address is calculated, the Offchain (TypeScript) and the Onchain (Ru
 
 ## 2. Defining our "Rows" (Structs)
 
-To store data in these accounts, we define Rust `structs`. However, Solana accounts are just raw buffers of bytes. We use **Borsh** to turn our Rust objects into bytes and back again.
+To store data in these accounts, we define Rust `structs`. 
+However, Solana accounts are just raw buffers of bytes. 
+We use **Borsh** to turn our Rust objects into bytes and back again.
 
 ### A. The DAO State
 
@@ -86,15 +90,16 @@ impl VaultV1 {
 ## 3. The "Memory Alignment" Trap
 
 > [!CAUTION]
-You might notice we use `pub const LEN: usize = 81;` instead of `std::mem::size_of::<Self>()`.
-**Why?** Rust often adds **"padding"** bytes to align data in memory (making 81 bytes become 88 bytes) to optimize CPU access. However, **Borsh** is a compact serializer; it does not care about padding and only writes the raw data.
-If you reserve 88 bytes in the account but Borsh only writes 81, the program will see 7 "leftover" bytes and throw the dreaded `Not all bytes read` error during deserialization.
+> You might notice we use `pub const LEN: usize = 81;` instead of `std::mem::size_of::<Self>()`.
+> **Why?** Rust often adds **"padding"** bytes to align data in memory (making 81 bytes become 88 bytes) to optimize CPU access. 
+> However, **Borsh** is a compact serializer. It does not care about padding and only writes the raw data.
+> If you reserve 88 bytes in the account but Borsh only writes 81, the program will see 7 "leftover" bytes and throw the dreaded `Not all bytes read` error during deserialization.
 
 > [!TIP]
-Always calculate your LEN manually by summing up the exact bytes of each field:
-- `Pubkey` = 32 bytes
-- `u64` = 8 bytes
-- `u8` / `Enum` = 1 byte
+> Always calculate your LEN manually by summing up the exact bytes of each field:
+> - `Pubkey` = 32 bytes
+> - `u64` = 8 bytes
+> - `u8` / `Enum` = 1 byte
 
 ## 4. How the Program "Signs" for the Vault
 
