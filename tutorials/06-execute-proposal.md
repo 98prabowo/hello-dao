@@ -1,10 +1,12 @@
 # Instruction: Execute Proposal
 
-In this chapter, we implement the "payday" logic. This instruction demonstrates how a DAO actually moves funds and the unique way **Program Owned Accounts** handle SOL transfers.
+In this chapter, we implement the "payday" logic. 
+This instruction demonstrates how a DAO actually moves funds and the unique way **Program Owned Accounts** handle SOL transfers.
 
 ## 1. The Instruction Data (The Input)
 
-Like the voting instruction, `ExecuteProposalV1` doesn't require any custom input data. All the information we need (the amount and the recipient) is already stored in the `ProposalV1` account state from when it was created.
+Like the voting instruction, `ExecuteProposalV1` doesn't require any custom input data. 
+All the information we need (the amount and the recipient) is already stored in the `ProposalV1` account state from when it was created.
 
 ## 2. Defining the Accounts Struct
 
@@ -162,7 +164,8 @@ fn execute_proposal(&self) -> ProgramResult {
 
 ### B. Moving the SOL (The "Magic" Reallocation)
 
-In Solana Native, if a program owns an account, it can directly modify the `lamports` field. We don't call the System Program. We simply subtract from one and add to the other.
+In Solana Native, if a program owns an account, it can directly modify the `lamports` field. 
+We don't call the System Program. We simply subtract from one and add to the other.
 
 ```rust
 fn execute_proposal(&self) -> ProgramResult {
@@ -215,8 +218,9 @@ impl<'a, 'info> InstructionProcessor for ExecuteProposalV1<'a, 'info> {
 }
 ```
 
-[!CAUTION]
-**The "Must Not Carry Data" Trap**
-If you tried to use `system_instruction::transfer` here, the transaction would fail because the Vault has data. Only "System Owned" accounts (wallets) can use the standard transfer. For Program Owned accounts, **manual reallocation** is the standard way to move funds.
+> [!CAUTION]
+> **The "Must Not Carry Data" Trap**
+> If you tried to use `system_instruction::transfer` here, the transaction would fail because the Vault has data. Only "System Owned" accounts (wallets) can use the standard transfer. 
+> For Program Owned accounts, **manual reallocation** is the standard way to move funds.
 
 [⬅️ Previous: Cast Vote](05-cast-vote.md) | [Next: Entrypoint & Router ➡️](07-entrypoint.md)

@@ -1,10 +1,13 @@
 # The Entrypoint & Router
 
-In this final technical chapter, we will implement the "Brain" of our program. This is the `Entrypoint`, the single door through which every transaction must pass, and the `Router` that directs traffic to our specific instruction logic.
+In this final technical chapter, we will implement the "Brain" of our program. 
+This is the `Entrypoint`, the single door through which every transaction must pass, and the `Router` that directs traffic to our specific instruction logic.
 
 ## 1. The Instruction Enum (The Map)
 
-In Solana Native, the program receives a raw buffer of bytes (`&[u8]`) as instruction data. We use a Rust `enum` to define every possible action our DAO can perform. When the client sends a `0`, it means "init_dao_v1"; a `1` means "create_proposal_v1," and so on.
+In Solana Native, the program receives a raw buffer of bytes (`&[u8]`) as instruction data. 
+We use a Rust `enum` to define every possible action our DAO can perform. 
+When the client sends a `0`, it means "init_dao_v1"; a `1` means "create_proposal_v1," and so on.
 
 ```rust
 #[derive(Debug, Clone, BorshSerialize, BorshDeserialize)]
@@ -16,10 +19,10 @@ pub enum DaoInstruction {
 }
 ```
 
-[!TIP]
-
-**💡 Why use an Enum?**
-Using `BorshDeserialize` on this enum allows the program to automatically look at the first byte of the data to decide which variant to "unpack." This is the standard way to handle multiple instructions in a single Solana program.
+> [!TIP]
+> **💡 Why use an Enum?**
+> Using `BorshDeserialize` on this enum allows the program to automatically look at the first byte of the data to decide which variant to "unpack." 
+> This is the standard way to handle multiple instructions in a single Solana program.
 
 ## 2. The Entrypoint (The Front Door)
 
