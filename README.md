@@ -37,7 +37,10 @@ We provide a specialized Makefile to handle the heavy lifting of the Solana CLI.
 
 ## Tutorial
 
-[Start ➡️](./tutorials/01-setup.md)
+> [!IMPORTANT]
+> Before start the tutorial, after cloning this repository please create your own branch with `main` as base branch.
+
+[Let's start learning ➡️](./tutorials/01-setup.md)
 
 ## Simulation Suite
 
